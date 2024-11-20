@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ENVIRONMENTS } from '../../constants/ENVIRONMENTS';
+import { ENVIRONMENTS } from '../../../constants/ENVIRONMENTS';
 
 mongoose.Promise = global.Promise;
 
