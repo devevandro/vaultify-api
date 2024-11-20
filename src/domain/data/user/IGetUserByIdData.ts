@@ -6,6 +6,6 @@ export type Params = {
 
 export type Result = UserEntity;
 
-export interface IUserData {
+export interface IGetUserByIdData {
   getUserById(params: Params): Promise<Result>;
 }

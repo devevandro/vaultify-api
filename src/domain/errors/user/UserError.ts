@@ -1,4 +1,4 @@
-import AppError from '../../core/AppError';
+import AppError from '../../../core/AppError';
 
 type ErrorResponse = {
   message: string;
