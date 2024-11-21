@@ -1,13 +1,13 @@
 import IUseCase from '../../core/IUseCase';
-import {
-  IGetUserByIdData,
-  Params,
-  Result,
-} from '../data/user/IGetUserByIdData';
+import { IGetUserByIdData } from '../data/user/IGetUserByIdData';
+import { UserEntity } from '../entities/user/UserEntity';
 import { UserError } from '../errors/user/UserError';
 
-export type RequestDTO = Params;
-export type ResponseDTO = Result;
+export type RequestDTO = {
+  userId: string;
+};
+
+export type ResponseDTO = UserEntity;
 
 export class GetUserByIdUseCase implements IUseCase<RequestDTO, ResponseDTO> {
   constructor(

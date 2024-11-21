@@ -1,17 +1,17 @@
-import {
-  IUserData,
-  Params,
-  Result,
-} from '../../../../domain/data/user/IUserData';
 import { faker } from '@faker-js/faker';
 
-export class UserSpy implements IUserData {
+import {
+  IGetUserByIdData,
+  Params,
+  Result,
+} from '../../../../src/domain/data/user/IGetUserByIdData';
+
+export class UserSpy implements IGetUserByIdData {
   public params: Params;
   public result: Result = {
-    id: faker.database.mongodbObjectId(),
-    name: faker.lorem.text(),
+    userId: faker.database.mongodbObjectId(),
+    fullName: faker.lorem.text(),
     email: faker.internet.email(),
-    password: faker.internet.password(),
   };
 
   async getUserById(params: Params): Promise<Result> {

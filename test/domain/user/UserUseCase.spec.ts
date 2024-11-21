@@ -1,18 +1,21 @@
 import { faker } from '@faker-js/faker';
-import { RequestDTO, UserUseCase } from '../../../domain/useCases/UserUseCase';
 import { UserSpy } from '../../provider/spys/user/UserSpy';
 import { describe, expect, test, vi } from 'vitest';
-import { UserError } from '../../../domain/errors/UserError';
+import {
+  GetUserByIdUseCase,
+  RequestDTO,
+} from '../../../src/domain/useCases/GetUserByIdUseCase';
+import { UserError } from '../../../src/domain/errors/user/UserError';
 
 type MakeSut = {
-  useCase: UserUseCase;
+  useCase: GetUserByIdUseCase;
   userDataSpy: UserSpy;
   params: RequestDTO;
 };
 
 const makeSut = (): MakeSut => {
   const userDataSpy = new UserSpy();
-  const useCase = new UserUseCase({ userData: userDataSpy });
+  const useCase = new GetUserByIdUseCase({ getUserByIdData: userDataSpy });
   const params = {
     userId: faker.database.mongodbObjectId(),
   };
