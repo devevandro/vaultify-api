@@ -1,19 +1,21 @@
-import * as yup from 'yup';
-import { Controller, Get, Req } from '@nestjs/common';
 import { Request } from 'express';
-import { HttpRouterDecoratorFactory } from '../../factories/decorators/HttpRouterDecoratorFactory';
-import { UserFactory } from '../../factories/user/UserFactory';
+import * as yup from 'yup';
 
-@Controller('/users')
+import { Controller, Get, Req } from '@nestjs/common';
+
+import { HttpRouterDecoratorFactory } from '../../factories/decorators/HttpRouterDecoratorFactory';
+import { GetUserByEmailFactory } from '../../factories/user/GetUserByEmailFactory';
+
+@Controller('/user')
 export class UserController {
-  @Get('')
-  async getUserById(@Req() request: Request) {
+  @Get('/user-by-email')
+  async getUserByEmail(@Req() request: Request) {
     return new HttpRouterDecoratorFactory(
       request,
       {
-        userId: yup.string().required(),
+        email: yup.string().required(),
       },
-      async data => new UserFactory().execute({ userId: data.userId }),
+      async data => new GetUserByEmailFactory().execute(data.email),
     ).execute();
   }
 }

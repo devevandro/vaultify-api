@@ -3,9 +3,7 @@ import { IGetUserByIdData } from '../data/user/IGetUserByIdData';
 import { UserEntity } from '../entities/user/UserEntity';
 import { UserError } from '../errors/user/UserError';
 
-export type RequestDTO = {
-  userId: string;
-};
+export type RequestDTO = string;
 
 export type ResponseDTO = UserEntity;
 
@@ -14,7 +12,7 @@ export class GetUserByIdUseCase implements IUseCase<RequestDTO, ResponseDTO> {
     private readonly dependencies: { getUserByIdData: IGetUserByIdData },
   ) {}
 
-  async execute({ userId }: RequestDTO): Promise<ResponseDTO> {
+  async execute(userId: RequestDTO): Promise<ResponseDTO> {
     const { getUserByIdData } = this.dependencies;
     const user = await getUserByIdData.getUserById(userId);
 

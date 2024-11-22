@@ -6,7 +6,7 @@ import {
   Result,
 } from '../../../../src/domain/data/user/IGetUserByIdData';
 
-export class UserSpy implements IGetUserByIdData {
+export class GetUserByIdSpy implements IGetUserByIdData {
   public params: Params;
   public result: Result = {
     userId: faker.database.mongodbObjectId(),
