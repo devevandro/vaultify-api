@@ -16,7 +16,7 @@ export class GetUserByIdUseCase implements IUseCase<RequestDTO, ResponseDTO> {
 
   async execute({ userId }: RequestDTO): Promise<ResponseDTO> {
     const { getUserByIdData } = this.dependencies;
-    const user = await getUserByIdData.getUserById({ userId });
+    const user = await getUserByIdData.getUserById(userId);
 
     if (!user) {
       throw new UserError({ message: 'UserNotFound' });

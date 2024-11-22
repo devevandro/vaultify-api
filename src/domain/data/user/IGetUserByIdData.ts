@@ -1,8 +1,6 @@
 import { UserEntity } from '../../entities/user/UserEntity';
 
-export type Params = {
-  userId: string;
-};
+export type Params = string;
 
 export type Result = UserEntity;
 
