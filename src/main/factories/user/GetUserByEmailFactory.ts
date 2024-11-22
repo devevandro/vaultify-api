@@ -1,4 +1,4 @@
-import { GetUserByEmailUseCase } from '../../../domain/useCases/GetUserByEmailUseCase';
+import { GetUserByEmailUseCase } from '../../../domain/useCases/user/GetUserByEmailUseCase';
 import { MongoUserRepository } from '../../../infra/repositories/mongoose/repositories/MongoUserRepository';
 
 export class GetUserByEmailFactory extends GetUserByEmailUseCase {

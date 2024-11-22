@@ -6,7 +6,7 @@ import { UserError } from '../../../src/domain/errors/user/UserError';
 import {
   GetUserByIdUseCase,
   RequestDTO,
-} from '../../../src/domain/useCases/GetUserByIdUseCase';
+} from '../../../src/domain/useCases/user/GetUserByIdUseCase';
 import { GetUserByIdSpy } from '../../provider/spys/user/GetUserByIdSpy';
 
 type MakeSut = {

@@ -1,4 +1,4 @@
-import { GetUserByIdUseCase } from '../../../domain/useCases/GetUserByIdUseCase';
+import { GetUserByIdUseCase } from '../../../domain/useCases/user/GetUserByIdUseCase';
 import { MongoUserRepository } from '../../../infra/repositories/mongoose/repositories/MongoUserRepository';
 
 export class GetUserByIdFactory extends GetUserByIdUseCase {

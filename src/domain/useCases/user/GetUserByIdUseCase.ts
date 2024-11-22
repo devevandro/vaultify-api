@@ -1,7 +1,7 @@
-import IUseCase from '../../core/IUseCase';
-import { IGetUserByIdData } from '../data/user/IGetUserByIdData';
-import { UserEntity } from '../entities/user/UserEntity';
-import { UserError } from '../errors/user/UserError';
+import IUseCase from '../../../core/IUseCase';
+import { IGetUserByIdData } from '../../data/user/IGetUserByIdData';
+import { UserEntity } from '../../entities/user/UserEntity';
+import { UserError } from '../../errors/user/UserError';
 
 export type RequestDTO = string;
 

@@ -6,7 +6,7 @@ import { UserError } from '../../../src/domain/errors/user/UserError';
 import {
   GetUserByEmailUseCase,
   RequestDTO,
-} from '../../../src/domain/useCases/GetUserByEmailUseCase';
+} from '../../../src/domain/useCases/user/GetUserByEmailUseCase';
 import { GetUserByEmailSpy } from '../../provider/spys/user/GetUserByEmailSpy';
 
 type MakeSut = {
