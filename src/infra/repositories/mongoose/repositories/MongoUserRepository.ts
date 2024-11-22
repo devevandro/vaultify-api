@@ -1,5 +1,6 @@
 import { connection, mongo } from 'mongoose';
 
+import * as CreateUserData from '../../../../domain/data/user/ICreateUserData';
 import * as GetUserByEmailData from '../../../../domain/data/user/IGetUserByEmailData';
 import * as GetUserByIdData from '../../../../domain/data/user/IGetUserByIdData';
 import { UserMapper } from '../mappers/UserMapper';
@@ -7,6 +8,7 @@ import { IUserSchema, UserSchema } from '../models/UserModel';
 
 export class MongoUserRepository
   implements
+    CreateUserData.ICreateUserData,
     GetUserByIdData.IGetUserByIdData,
     GetUserByEmailData.IGetUserByEmailData
 {
@@ -27,5 +29,12 @@ export class MongoUserRepository
     const userByEmail = await this.userModel.findOne({ email });
 
     return userByEmail ? UserMapper.toEntity(userByEmail) : null;
+  }
+
+  async createUser(
+    params: CreateUserData.Params,
+  ): Promise<CreateUserData.Result> {
+    const userCreated = await this.userModel.create(params);
+    return userCreated ? UserMapper.toEntity(userCreated) : null;
   }
 }

@@ -1,7 +1,7 @@
 import IUseCase from '../../../core/IUseCase';
 import { IGetUserByIdData } from '../../data/user/IGetUserByIdData';
 import { UserEntity } from '../../entities/user/UserEntity';
-import { UserError } from '../../errors/user/UserError';
+import { GetUserError } from '../../errors/user/GetUserError';
 
 export type RequestDTO = string;
 
@@ -17,7 +17,7 @@ export class GetUserByIdUseCase implements IUseCase<RequestDTO, ResponseDTO> {
     const user = await getUserByIdData.getUserById(userId);
 
     if (!user) {
-      throw new UserError({ message: 'UserNotFound' });
+      throw new GetUserError({ message: 'UserNotFound' });
     }
 
     return user;
