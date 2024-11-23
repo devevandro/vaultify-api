@@ -1,6 +1,7 @@
 import { connection, mongo } from 'mongoose';
 
 import * as CreateUserData from '../../../../domain/data/user/ICreateUserData';
+import * as DeleteUserByIdData from '../../../../domain/data/user/IDeleteUserByIdData';
 import * as GetUserByEmailData from '../../../../domain/data/user/IGetUserByEmailData';
 import * as GetUserByIdData from '../../../../domain/data/user/IGetUserByIdData';
 import { UserMapper } from '../mappers/UserMapper';
@@ -9,6 +10,7 @@ import { IUserSchema, UserSchema } from '../models/UserModel';
 export class MongoUserRepository
   implements
     CreateUserData.ICreateUserData,
+    DeleteUserByIdData.IDeleteUserByIdData,
     GetUserByIdData.IGetUserByIdData,
     GetUserByEmailData.IGetUserByEmailData
 {
@@ -36,5 +38,12 @@ export class MongoUserRepository
   ): Promise<CreateUserData.Result> {
     const userCreated = await this.userModel.create(params);
     return userCreated ? UserMapper.toEntity(userCreated) : null;
+  }
+
+  async deleteUserById(
+    userId: DeleteUserByIdData.Params,
+  ): Promise<DeleteUserByIdData.Result> {
+    await this.userModel.deleteOne({ _id: userId });
+    return true;
   }
 }
