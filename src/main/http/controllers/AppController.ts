@@ -1,9 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('/home')
+@Controller('/health')
 export class AppController {
   @Get('/')
   root() {
-    return ``;
+    return {
+      code: 200,
+      mwssage: 'API is running - version 1.0.0',
+    };
   }
 }

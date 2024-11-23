@@ -1,11 +1,9 @@
 import { UserEntity } from '../../entities/user/UserEntity';
 
-export type Params = {
-  userId: string;
-};
+export type Params = string;
 
 export type Result = UserEntity;
 
-export interface IUserData {
+export interface IGetUserByIdData {
   getUserById(params: Params): Promise<Result>;
 }

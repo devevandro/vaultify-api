@@ -1,11 +1,11 @@
-import AppError from '../../core/AppError';
+import AppError from '../../../core/AppError';
 
 type ErrorResponse = {
   message: string;
   code?: number;
 };
 
-export class UserError extends AppError {
+export class DeleteUserError extends AppError {
   constructor(errorResponse: ErrorResponse) {
     const { message, code } = errorResponse;
     super(message, code);
