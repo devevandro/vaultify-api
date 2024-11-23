@@ -34,10 +34,9 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
-.env.dev
-.env.prod
-.env.stage
+mongodb
 
-# Envault
-*.envault.json
+.env**
+.envault.json
+
+package-lock.json

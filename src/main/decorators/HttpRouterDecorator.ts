@@ -1,5 +1,6 @@
-import * as yup from 'yup';
 import { Request } from 'express';
+import * as yup from 'yup';
+
 import AppError from '../../core/AppError';
 import { ValidationError } from '../../utils/ValidationError';
 
