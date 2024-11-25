@@ -1,5 +1,5 @@
-import { IUserSchema } from '../models/UserModel';
-import { UserEntity } from '../../../../domain/entities/user/UserEntity';
+import { IUserSchema } from '../../models/user/UserModel';
+import { UserEntity } from '../../../../../domain/entities/user/UserEntity';
 
 export class UserMapper {
   static toEntity(user: IUserSchema): UserEntity {

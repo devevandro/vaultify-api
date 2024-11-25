@@ -1,7 +1,7 @@
 import IUseCase from '../../../core/IUseCase';
 import { IGetUserByEmailData } from '../../data/user/IGetUserByEmailData';
 import { UserEntity } from '../../entities/user/UserEntity';
-import { GetUserError } from '../../errors/user/GetUserError';
+import { UserError } from '../../errors/user/UserError';
 
 export type RequestDTO = string;
 
@@ -19,7 +19,7 @@ export class GetUserByEmailUseCase
     const user = await getUserByEmailData.getUserByEmail(email);
 
     if (!user) {
-      throw new GetUserError({ message: 'UserNotFound' });
+      throw new UserError({ message: 'UserNotFound' });
     }
 
     return user;
