@@ -1,5 +1,5 @@
 import { DeleteUserByIdUseCase } from '../../../domain/useCases/user/DeleteUserByIdUseCase';
-import { MongoUserRepository } from '../../../infra/repositories/mongoose/repositories/MongoUserRepository';
+import { MongoUserRepository } from '../../../infra/repositories/mongoose/repositories/user/MongoUserRepository';
 
 export class DeleteUserByIdFactory extends DeleteUserByIdUseCase {
   constructor() {

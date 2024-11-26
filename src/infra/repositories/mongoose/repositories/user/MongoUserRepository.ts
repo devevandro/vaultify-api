@@ -1,11 +1,11 @@
 import { connection, mongo } from 'mongoose';
 
-import * as CreateUserData from '../../../../domain/data/user/ICreateUserData';
-import * as DeleteUserByIdData from '../../../../domain/data/user/IDeleteUserByIdData';
-import * as GetUserByEmailData from '../../../../domain/data/user/IGetUserByEmailData';
-import * as GetUserByIdData from '../../../../domain/data/user/IGetUserByIdData';
-import { UserMapper } from '../mappers/UserMapper';
-import { IUserSchema, UserSchema } from '../models/UserModel';
+import * as CreateUserData from '../../../../../domain/data/user/ICreateUserData';
+import * as DeleteUserByIdData from '../../../../../domain/data/user/IDeleteUserByIdData';
+import * as GetUserByEmailData from '../../../../../domain/data/user/IGetUserByEmailData';
+import * as GetUserByIdData from '../../../../../domain/data/user/IGetUserByIdData';
+import { UserMapper } from '../../mappers/user/UserMapper';
+import { IUserSchema, UserSchema } from '../../models/user/UserModel';
 
 export class MongoUserRepository
   implements

@@ -5,7 +5,7 @@ type ErrorResponse = {
   code?: number;
 };
 
-export class GetUserError extends AppError {
+export class UserError extends AppError {
   constructor(errorResponse: ErrorResponse) {
     const { message, code } = errorResponse;
     super(message, code);
