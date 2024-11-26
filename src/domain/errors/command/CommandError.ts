@@ -5,10 +5,10 @@ type ErrorResponse = {
   code?: number;
 };
 
-export class DeleteUserError extends AppError {
+export class CommandError extends AppError {
   constructor(errorResponse: ErrorResponse) {
     const { message, code } = errorResponse;
     super(message, code);
-    this.name = 'UserError';
+    this.name = 'CommandError';
   }
 }

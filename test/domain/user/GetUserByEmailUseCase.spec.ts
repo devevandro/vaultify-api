@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { faker } from '@faker-js/faker';
 
-import { GetUserError } from '../../../src/domain/errors/user/GetUserError';
+import { UserError } from '../../../src/domain/errors/user/UserError';
 import {
   GetUserByEmailUseCase,
   RequestDTO,
@@ -45,9 +45,7 @@ describe('Unit Tests', () => {
 
     const promise = useCase.execute(params);
 
-    expect(promise).rejects.toThrow(
-      new GetUserError({ message: 'UserNotFound' }),
-    );
+    expect(promise).rejects.toThrow(new UserError({ message: 'UserNotFound' }));
   });
 
   test('Shoud be able get user by Email', async () => {
