@@ -1,4 +1,4 @@
-import { UserEntity } from '../../entities/user/UserEntity';
+import { CommandEntity } from '../../entities/command/CommandEntity';
 
 export type Params = {
   userId: string;
@@ -8,7 +8,7 @@ export type Params = {
   description?: string;
 };
 
-export type Result = UserEntity;
+export type Result = CommandEntity;
 
 export interface ICreateCommandData {
   createCommand(params: Params): Promise<Result>;

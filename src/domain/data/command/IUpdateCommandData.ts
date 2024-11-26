@@ -1,4 +1,5 @@
 export type Params = {
+  id: string;
   userId: string;
   tag?: string;
   command?: string;
@@ -9,5 +10,5 @@ export type Params = {
 export type Result = boolean;
 
 export interface IUpdateCommandData {
-  createCommand(params: Params): Promise<Result>;
+  updateCommand(params: Params): Promise<Result>;
 }

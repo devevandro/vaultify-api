@@ -1,28 +1,29 @@
 import IUseCase from '../../../core/IUseCase';
 import {
-  IDeleteCommandByIdData,
+  IUpdateCommandData,
   Params,
-} from '../../data/command/IDeleteCommandByIdData';
+} from '../../data/command/IUpdateCommandData';
 
 export type RequestDTO = {
+  id: string;
   userId: string;
-  commandId: string;
+  tag?: string;
+  command?: string;
+  title?: string;
+  description?: string;
 };
 
-export class DeleteCommandByIdUseCase implements IUseCase<RequestDTO, boolean> {
+export class UpdateCommandByIdUseCase implements IUseCase<RequestDTO, boolean> {
   constructor(
     private readonly dependencies: {
-      deleteCommandByIdData: IDeleteCommandByIdData;
+      updateCommandByIdData: IUpdateCommandData;
     },
   ) {}
 
-  async execute({ userId, commandId }: Params): Promise<boolean> {
-    const { deleteCommandByIdData } = this.dependencies;
+  async execute(params: Params): Promise<boolean> {
+    const { updateCommandByIdData } = this.dependencies;
 
-    await deleteCommandByIdData.deleteCommandById({
-      userId,
-      commandId,
-    });
+    await updateCommandByIdData.updateCommand(params);
 
     return true;
   }
