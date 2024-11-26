@@ -15,14 +15,14 @@ export type RequestDTO = {
 export class CreateCommandUseCase implements IUseCase<RequestDTO, boolean> {
   constructor(
     private readonly dependencies: {
-      createCommandByIdData: ICreateCommandData;
+      createCommandData: ICreateCommandData;
     },
   ) {}
 
   async execute(params: Params): Promise<boolean> {
-    const { createCommandByIdData } = this.dependencies;
+    const { createCommandData } = this.dependencies;
 
-    await createCommandByIdData.createCommand(params);
+    await createCommandData.createCommand(params);
 
     return true;
   }
