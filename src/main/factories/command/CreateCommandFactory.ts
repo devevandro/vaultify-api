@@ -3,7 +3,7 @@ import { MongoCommandRepository } from '../../../infra/repositories/mongoose/rep
 
 export class CreateCommandFactory extends CreateCommandUseCase {
   constructor() {
-    const createCommandByIdData = new MongoCommandRepository();
-    super({ createCommandByIdData });
+    const createCommandData = new MongoCommandRepository();
+    super({ createCommandData });
   }
 }
