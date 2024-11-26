@@ -12,7 +12,7 @@ export type RequestDTO = {
   description?: string;
 };
 
-export class CreateCommandByIdUseCase implements IUseCase<RequestDTO, boolean> {
+export class CreateCommandUseCase implements IUseCase<RequestDTO, boolean> {
   constructor(
     private readonly dependencies: {
       createCommandByIdData: ICreateCommandData;

@@ -5,7 +5,7 @@ import { CommandError } from '../../errors/command/CommandError';
 
 export type ResponseDTO = CommandEntity[];
 
-export class GetUserByEmailUseCase implements IUseCase<string, ResponseDTO> {
+export class GetCommandsUseCase implements IUseCase<string, ResponseDTO> {
   constructor(
     private readonly dependencies: { getCommandsData: IGetCommandsData },
   ) {}
