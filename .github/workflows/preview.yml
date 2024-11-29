@@ -6,7 +6,8 @@ env:
 
 on:
   push:
-    branches: [feat/test]
+    branches:
+      - stage
 
   workflow_dispatch:
 
@@ -48,7 +49,6 @@ jobs:
           SECRETS: ${{ toJson(secrets) }}
         run: .github/scripts/update-vercel-env.sh "$SECRETS" preview ${{ secrets.VERCEL_TOKEN }}
 
-
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
@@ -59,10 +59,10 @@ jobs:
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Set Domain Based on Branch
-        if: github.ref_name == 'main' || github.ref_name == 'feat/test'
+        if: github.ref_name == 'main' || github.ref_name == 'stage'
         run: |
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
-            vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT }} --token=${{ secrets.VERCEL_TOKEN }}
-          elif [ "${GITHUB_REF_NAME}" = "feat/test" ]; then
-            vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT }} --token=${{ secrets.VERCEL_TOKEN }}
+            vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
+          elif [ "${GITHUB_REF_NAME}" = "stage" ]; then
+            vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
           fi
