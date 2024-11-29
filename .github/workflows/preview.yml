@@ -40,6 +40,9 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel
 
+      - name: Grant execute permissions for update-envs.sh
+        run: chmod +x .github/scripts/update-vercel-env.sh
+
       - name: Update Environment Variables on Vercel
         env:
           SECRETS: ${{ toJson(secrets) }}
