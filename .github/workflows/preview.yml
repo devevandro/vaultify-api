@@ -14,7 +14,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: preview
+    environment: Preview
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
