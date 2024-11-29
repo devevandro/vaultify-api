@@ -1,0 +1,68 @@
+name: Vercel Preview Deployment
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches:
+      - stage
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: yarn
+
+      - name: Running tests
+        run: yarn test:ci
+
+      - name: Running eslint
+        run: yarn lint
+
+      - name: Build project
+        run: yarn build
+
+  Deploy-Preview:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Grant execute permissions for update-envs.sh
+        run: chmod +x .github/scripts/update-vercel-env.sh
+
+      - name: Update Environment Variables on Vercel
+        env:
+          SECRETS: ${{ toJson(secrets) }}
+        run: .github/scripts/update-vercel-env.sh "$SECRETS" preview ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Set Domain Based on Branch
+        if: github.ref_name == 'main' || github.ref_name == 'stage'
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
+          elif [ "${GITHUB_REF_NAME}" = "stage" ]; then
+            vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
+          fi
