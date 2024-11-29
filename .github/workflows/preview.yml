@@ -41,8 +41,8 @@ jobs:
       - name: Set Environment Variables
         run: |
           echo "Setting environment variables..."
-          echo $MONGO_URL | vercel env add MONGO_URL preview --token=${{ secrets.VERCEL_TOKEN }}
-          echo $API_KEY | vercel env add API_KEY preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo $MONGO_URL | vercel env set MONGO_URL preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo $API_KEY | vercel env set API_KEY preview --token=${{ secrets.VERCEL_TOKEN }}
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
           API_KEY: ${{ secrets.API_KEY }}
