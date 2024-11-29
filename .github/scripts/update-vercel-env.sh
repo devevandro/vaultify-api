@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -e  # Sai imediatamente em caso de erro
 
 # Recebendo os parâmetros
 SECRETS_JSON=$1
@@ -21,12 +21,12 @@ update_env_vars() {
     "github_token"
   )
 
-  # Construir o filtro jq para excluir as variáveis listadas
+  # Filtro jq para excluir variáveis indesejadas
   jq_filter=$(printf 'select(.key != "%s") | ' "${exclude_vars[@]}")
-  jq_filter="${jq_filter::-3}"
+  jq_filter="${jq_filter::-3}"  # Remove o último ' | '
 
   # Itera sobre cada par chave-valor no JSON
-  echo "$SECRETS_JSON" | jq -r "to_entries | map($jq_filter) | map(\"\(.key)=\(.value)\") | join(\" \")" | while IFS= read -r VAR; do
+  echo "$SECRETS_JSON" | jq -r "to_entries | map($jq_filter) | map(\"\(.key)=\(.value)\") | .[]" | while IFS= read -r VAR; do
     # Extrai chave e valor
     VARIABLE_NAME=$(echo "$VAR" | cut -d '=' -f 1)
     VALUE=$(echo "$VAR" | cut -d '=' -f 2-)
