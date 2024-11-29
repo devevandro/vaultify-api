@@ -38,6 +38,18 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel
 
+      - name: Deploy Project to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Set Domain Based on Branch
+        if: github.ref_name == 'main' || github.ref_name == 'feat/test'
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT }} --token=${{ secrets.VERCEL_TOKEN }}
+          elif [ "${GITHUB_REF_NAME}" = "feat/test" ]; then
+            vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT }} --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
       - name: Set Environment Variables
         run: |
           echo "Setting environment variables..."
