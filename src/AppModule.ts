@@ -15,7 +15,6 @@ import { RateLimitModule } from './main/rateLimit/RateLimitModule';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ApiKeyMiddleware).forRoutes('/users');
-    consumer.apply(ApiKeyMiddleware).forRoutes('/commands');
+    consumer.apply(ApiKeyMiddleware).forRoutes('/users', '/commands');
   }
 }
