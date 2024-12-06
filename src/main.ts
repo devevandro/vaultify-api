@@ -16,8 +16,6 @@ async function bootstrap() {
 
   await connectToDataBase();
   await app.listen(ENVIRONMENTS.PORT);
-
-  return app;
 }
 
-export const app = bootstrap();
+bootstrap();
