@@ -7,14 +7,22 @@ import { CommandController } from './main/http/controllers/CommandController';
 import { UserController } from './main/http/controllers/UserController';
 import { ApiKeyMiddleware } from './main/http/middleware/ApiKeyMiddleware';
 import { RateLimitModule } from './main/rateLimit/RateLimitModule';
+import { FavoriteController } from './main/http/controllers/FavoriteController';
 
 @Module({
   imports: [ConfigModule.forRoot(), ScheduleModule.forRoot(), RateLimitModule],
-  controllers: [AppController, CommandController, UserController],
+  controllers: [
+    AppController,
+    FavoriteController,
+    CommandController,
+    UserController,
+  ],
   providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ApiKeyMiddleware).forRoutes('/users', '/commands');
+    consumer
+      .apply(ApiKeyMiddleware)
+      .forRoutes('/users', '/favorite', '/commands');
   }
 }
