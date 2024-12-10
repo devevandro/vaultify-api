@@ -7,7 +7,7 @@ import { CreateFavoriteFactory } from '../../factories/favorite/CreateFavoriteFa
 import { DeleteFavoriteByIdFactory } from '../../factories/favorite/DeleteFavoriteByIdFactory';
 import { GetFavoriteByIdFactory } from '../../factories/favorite/GetFavoriteByIdFactory';
 import { GetFavoritesFactory } from '../../factories/favorite/GetFavoritesFactory';
-import { UpdateFavoriteByIdFactory } from '../../factories/Favorite/UpdateFavoriteByIdFactory';
+import { UpdateFavoriteByIdFactory } from '../../factories/favorite/UpdateFavoriteByIdFactory';
 import { HttpRouterDecoratorFactory } from '../../factories/decorators/HttpRouterDecoratorFactory';
 
 @Controller('/favorites')
