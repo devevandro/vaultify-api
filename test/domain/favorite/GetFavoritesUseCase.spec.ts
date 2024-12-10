@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { faker } from '@faker-js/faker';
 
 import { FavoriteError } from '../../../src/domain/errors/favorite/FavoriteError';
-import { GetFavoritesUseCase } from '../../../src/domain/useCases/Favorite/GetFavoritesUseCase';
+import { GetFavoritesUseCase } from '../../../src/domain/useCases/favorite/GetFavoritesUseCase';
 import { GetFavoritesSpy } from '../../provider/spys/favorite/GetFavoritesSpy';
 
 type MakeSut = {

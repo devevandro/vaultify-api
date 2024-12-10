@@ -6,7 +6,7 @@ import { FavoriteError } from '../../../src/domain/errors/favorite/FavoriteError
 import {
   GetFavoriteByIdUseCase,
   RequestDTO,
-} from '../../../src/domain/useCases/Favorite/GetFavoriteByIdUseCase';
+} from '../../../src/domain/useCases/favorite/GetFavoriteByIdUseCase';
 import { GetFavoriteByIdSpy } from '../../provider/spys/favorite/GetFavoriteByIdSpy';
 
 type MakeSut = {
