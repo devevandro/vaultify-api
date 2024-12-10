@@ -4,7 +4,7 @@ import {
   Params,
 } from '../../data/favorite/IGetFavoriteByIdData';
 import { FavoriteEntity } from '../../entities/favorite/FavoriteEntity';
-import { FavoriteError } from '../../errors/favorite/FavoriteError';
+import { ErrorMessage } from '../../errors/ErrorMessage';
 
 export type RequestDTO = {
   userId: string;
@@ -29,7 +29,7 @@ export class GetFavoriteByIdUseCase
     });
 
     if (!FavoriteById) {
-      throw new FavoriteError({ message: 'FavoriteNotFound' });
+      throw new ErrorMessage({ message: 'FavoriteNotFound' });
     }
 
     return FavoriteById;

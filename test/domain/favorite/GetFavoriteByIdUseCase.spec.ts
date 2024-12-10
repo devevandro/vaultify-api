@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { faker } from '@faker-js/faker';
 
-import { FavoriteError } from '../../../src/domain/errors/favorite/FavoriteError';
+import { ErrorMessage } from '../../../src/domain/errors/ErrorMessage';
 import {
   GetFavoriteByIdUseCase,
   RequestDTO,
@@ -49,7 +49,7 @@ describe('Unit Tests', () => {
     const promise = useCase.execute(params);
 
     expect(promise).rejects.toThrow(
-      new FavoriteError({ message: 'FavoriteNotFound' }),
+      new ErrorMessage({ message: 'FavoriteNotFound' }),
     );
   });
 

@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { faker } from '@faker-js/faker';
 
-import { CommandError } from '../../../src/domain/errors/command/CommandError';
+import { ErrorMessage } from '../../../src/domain/errors/ErrorMessage';
 import { GetCommandsUseCase } from '../../../src/domain/useCases/command/GetCommandsUseCase';
 import { GetCommandsSpy } from '../../provider/spys/command/GetCommandsSpy';
 
@@ -43,7 +43,7 @@ describe('Unit Tests', () => {
     const promise = useCase.execute(params);
 
     expect(promise).rejects.toThrow(
-      new CommandError({ message: 'CommandsNotFound' }),
+      new ErrorMessage({ message: 'CommandsNotFound' }),
     );
   });
 
