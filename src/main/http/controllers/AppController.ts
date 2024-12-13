@@ -6,7 +6,7 @@ export class AppController {
   root() {
     return {
       code: 200,
-      mwssage: 'API is running - version 1.0.0',
+      message: 'API is running - version 1.0.0',
     };
   }
 }
