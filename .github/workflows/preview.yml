@@ -24,11 +24,11 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Running tests
-        run: yarn test:ci
-
       - name: Running eslint
         run: yarn lint
+
+      - name: Running tests
+        run: yarn test:ci
 
       - name: Build project
         run: yarn build
@@ -42,13 +42,13 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel
 
-      - name: Grant execute permissions for update-envs.sh
-        run: chmod +x .github/scripts/update-vercel-env.sh
+      # - name: Grant execute permissions for update-envs.sh
+      #   run: chmod +x .github/scripts/update-vercel-env.sh
 
-      - name: Update Environment Variables on Vercel
-        env:
-          SECRETS: ${{ toJson(secrets) }}
-        run: .github/scripts/update-vercel-env.sh "$SECRETS" preview ${{ secrets.VERCEL_TOKEN }}
+      # - name: Update Environment Variables on Vercel
+      #   env:
+      #     SECRETS: ${{ toJson(secrets) }}
+      #   run: .github/scripts/update-vercel-env.sh "$SECRETS" preview ${{ secrets.VERCEL_TOKEN }}
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
@@ -59,11 +59,15 @@ jobs:
       - name: Deploy Project Artifacts
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Set Domain Based on Branch
-        if: github.ref_name == 'main' || github.ref_name == 'stage'
+      - name: Sincronizar Secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          if [ "${GITHUB_REF_NAME}" = "main" ]; then
-            vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
-          elif [ "${GITHUB_REF_NAME}" = "stage" ]; then
-            vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
-          fi
+          for secret in $(gh secret list | awk '{print $1}'); do
+            value=$(gh secret get "$secret")
+            vercel env add "$secret" "$value" production
+          done
+
+      # - name: Set Domain Based on Branch
+      #   run:
+      #     vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}

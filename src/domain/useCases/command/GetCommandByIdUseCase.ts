@@ -4,7 +4,7 @@ import {
   Params,
 } from '../../data/command/IGetCommandByIdData';
 import { CommandEntity } from '../../entities/command/CommandEntity';
-import { CommandError } from '../../errors/command/CommandError';
+import { ErrorMessage } from '../../errors/ErrorMessage';
 
 export type RequestDTO = {
   userId: string;
@@ -27,7 +27,7 @@ export class GetCommandByIdUseCase
     });
 
     if (!commandById) {
-      throw new CommandError({ message: 'CommandNotFound' });
+      throw new ErrorMessage({ message: 'CommandNotFound' });
     }
 
     return commandById;

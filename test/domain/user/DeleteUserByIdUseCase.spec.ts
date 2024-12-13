@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { faker } from '@faker-js/faker';
 
-import { UserError } from '../../../src/domain/errors/user/UserError';
+import { ErrorMessage } from '../../../src/domain/errors/ErrorMessage';
 import { DeleteUserByIdUseCase } from '../../../src/domain/useCases/user/DeleteUserByIdUseCase';
 import { DeleteUserbyIdSpy } from '../../provider/spys/user/DeleteUserbyIdSpy';
 import { GetUserByIdSpy } from '../../provider/spys/user/GetUserByIdSpy';
@@ -48,6 +48,8 @@ describe('Unit Tests', () => {
 
     const promise = useCase.execute(params);
 
-    expect(promise).rejects.toThrow(new UserError({ message: 'UserNotFound' }));
+    expect(promise).rejects.toThrow(
+      new ErrorMessage({ message: 'UserNotFound' }),
+    );
   });
 });
