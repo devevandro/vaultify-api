@@ -5,7 +5,7 @@ import {
   Result,
 } from '../../data/user/IDeleteUserByIdData';
 import { IGetUserByIdData } from '../../data/user/IGetUserByIdData';
-import { UserError } from '../../errors/user/UserError';
+import { ErrorMessage } from '../../errors/ErrorMessage';
 
 export class DeleteUserByIdUseCase implements IUseCase<string, boolean> {
   constructor(
@@ -26,6 +26,6 @@ export class DeleteUserByIdUseCase implements IUseCase<string, boolean> {
       return true;
     }
 
-    throw new UserError({ message: 'UserNotFound' });
+    throw new ErrorMessage({ message: 'UserNotFound' });
   }
 }

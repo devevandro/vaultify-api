@@ -1,7 +1,7 @@
 import IUseCase from '../../../core/IUseCase';
 import { IGetCommandsData } from '../../data/command/IGetCommandsData';
 import { CommandEntity } from '../../entities/command/CommandEntity';
-import { CommandError } from '../../errors/command/CommandError';
+import { ErrorMessage } from '../../errors/ErrorMessage';
 
 export type ResponseDTO = CommandEntity[];
 
@@ -15,7 +15,7 @@ export class GetCommandsUseCase implements IUseCase<string, ResponseDTO> {
     const commands = await getCommandsData.getCommands(userId);
 
     if (!commands) {
-      throw new CommandError({ message: 'CommandsNotFound' });
+      throw new ErrorMessage({ message: 'CommandsNotFound' });
     }
 
     return commands;

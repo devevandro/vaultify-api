@@ -1,7 +1,7 @@
 import IUseCase from '../../../core/IUseCase';
 import { IGetFavoritesData } from '../../data/favorite/IGetFavoritesData';
 import { FavoriteEntity } from '../../entities/favorite/FavoriteEntity';
-import { FavoriteError } from '../../errors/favorite/FavoriteError';
+import { ErrorMessage } from '../../errors/ErrorMessage';
 
 export type ResponseDTO = FavoriteEntity[];
 
@@ -15,7 +15,7 @@ export class GetFavoritesUseCase implements IUseCase<string, ResponseDTO> {
     const Favorites = await getFavoritesData.getFavorites(userId);
 
     if (!Favorites) {
-      throw new FavoriteError({ message: 'FavoritesNotFound' });
+      throw new ErrorMessage({ message: 'FavoritesNotFound' });
     }
 
     return Favorites;
