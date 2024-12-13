@@ -5,11 +5,12 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './main/http/controllers/AppController';
 import { CommandController } from './main/http/controllers/CommandController';
 import { FavoriteController } from './main/http/controllers/FavoriteController';
+import { PasswordController } from './main/http/controllers/PasswordController';
 import { RedirectController } from './main/http/controllers/RedirectController';
+import { SecretController } from './main/http/controllers/SecretController';
 import { UserController } from './main/http/controllers/UserController';
 import { ApiKeyMiddleware } from './main/http/middleware/ApiKeyMiddleware';
 import { RateLimitModule } from './main/rateLimit/RateLimitModule';
-import { SecretController } from './main/http/controllers/SecretController';
 
 @Module({
   imports: [ConfigModule.forRoot(), ScheduleModule.forRoot(), RateLimitModule],
@@ -18,6 +19,7 @@ import { SecretController } from './main/http/controllers/SecretController';
     AppController,
     FavoriteController,
     CommandController,
+    PasswordController,
     UserController,
     SecretController,
   ],
