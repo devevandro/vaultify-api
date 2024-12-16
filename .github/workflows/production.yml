@@ -1,7 +1,10 @@
 name: Vercel Production Deployment
 
 env:
+  ## ID da organização no Vercel
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+  ## ID do projeto no Vercel
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
@@ -12,6 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  ## step para rodar os testes, lint e o buid do projeto
   build:
     runs-on: ubuntu-latest
     environment: Production
@@ -34,31 +38,28 @@ jobs:
         run: yarn build
 
   Deploy-Production:
+    ## step para fazer o deploy do projeto, só é executado quando o step build é executado
     needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
+       ## step para instalar o vercel cli
       - name: Install Vercel CLI
         run: npm install --global vercel
-
-      - name: Grant execute permissions for update-envs.sh
-        run: chmod +x .github/scripts/update-vercel-env.sh
-
-      - name: Update Environment Variables on Vercel
-        env:
-          SECRETS: ${{ toJson(secrets) }}
-        run: .github/scripts/update-vercel-env.sh "$SECRETS" production ${{ secrets.VERCEL_TOKEN }}
-
+      
+      ## step para fazer o deploy do projeto no modo de produção
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
+      ## step para fazer o deploy do projeto no modo de produção
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
+      ## step para fazer o alias do projeto para o domínio de produção. ex: https://meu-proejto.vercel.app
       - name: Set Domain Based on Branch
         if: github.ref_name == 'main' || github.ref_name == 'stage'
         run: |
