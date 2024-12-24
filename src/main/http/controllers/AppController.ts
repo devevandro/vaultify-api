@@ -6,7 +6,12 @@ export class AppController {
   root() {
     return {
       code: 200,
-      message: 'API is running - version 1.0.0',
+      response: {
+        health: 'Running',
+        version: '1.0.0',
+        environment: process.env.NODE_ENV === 'prod' ? 'prod' : 'stage',
+        status: 200,
+      },
     };
   }
 }
