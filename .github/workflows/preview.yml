@@ -1,7 +1,10 @@
 name: Vercel Preview Deployment
 
 env:
+  ## ID da organização no Vercel
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+  ## ID do projeto no Vercel
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
@@ -42,14 +45,6 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel
 
-      # - name: Grant execute permissions for update-envs.sh
-      #   run: chmod +x .github/scripts/update-vercel-env.sh
-
-      # - name: Update Environment Variables on Vercel
-      #   env:
-      #     SECRETS: ${{ toJson(secrets) }}
-      #   run: .github/scripts/update-vercel-env.sh "$SECRETS" preview ${{ secrets.VERCEL_TOKEN }}
-
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
@@ -58,16 +53,3 @@ jobs:
 
       - name: Deploy Project Artifacts
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Sincronizar Secrets
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: |
-          for secret in $(gh secret list | awk '{print $1}'); do
-            value=$(gh secret get "$secret")
-            vercel env add "$secret" "$value" production
-          done
-
-      # - name: Set Domain Based on Branch
-      #   run:
-      #     vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_STAGE }} --token=${{ secrets.VERCEL_TOKEN }}
