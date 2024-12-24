@@ -5,7 +5,6 @@ export class AppController {
   @Get('/')
   root() {
     return {
-      code: 200,
       response: {
         health: 'Running',
         version: '1.0.0',
