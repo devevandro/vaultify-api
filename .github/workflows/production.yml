@@ -54,16 +54,16 @@ jobs:
 
       ## step para fazer o deploy do projeto no modo de produção
       - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
       ## step para fazer o alias do projeto para o domínio de produção. ex: https://meu-proejto.vercel.app
       - name: Set Domain Based on Branch
-        if: github.ref_name == 'main' || github.ref_name == 'stage'
+        if: github.ref_name == 'master' || github.ref_name == 'stage'
         run: |
-          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+          if [ "${GITHUB_REF_NAME}" = "master" ]; then
             vercel alias set ${{ secrets.VERCEL_DOMAIN_PROJECT_PROD }} --token=${{ secrets.VERCEL_TOKEN }}
           elif [ "${GITHUB_REF_NAME}" = "stage" ]; then
             vercel alias  ${{ secrets.VERCEL_DOMAIN_PROJECT_PROD }} --token=${{ secrets.VERCEL_TOKEN }}
